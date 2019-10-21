@@ -28,6 +28,7 @@ const createUser = async (req,res) =>{
   }
 
 } 
+
 const authUser = async (req,res) => {
   let user;
   try {

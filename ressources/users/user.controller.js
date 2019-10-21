@@ -5,7 +5,7 @@ import {User} from './user.model';
 // GET /api/users/
 export const list = async (req,res)=>{
     try{
-        const users = await User.find().limit(50);
+        const users = await User.find();
         if(!users) return res.status(400).end();
         res.status(200).json({users:users});
     } catch(e){
@@ -28,3 +28,4 @@ export const listOne = async (req,res)=>{
 
 
 
+"
