@@ -31,6 +31,7 @@ export const listOne = async (req,res)=>{
 
 // GET /api/users/email/:email
 export const listOneByEmail = async (req,res)=>{
+    if (!(emailValidator(req.params.email))) res.status(400).end()
     try{
         const user = await User.findOne({email:req.params.email},{password : 0});
         if(!user) return res.status(404).end();
