@@ -25,7 +25,3 @@ export const listOne = async (req,res)=>{
         res.status(400).end()
     }
 };
-
-
-
-"
