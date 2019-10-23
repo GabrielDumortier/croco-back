@@ -24,4 +24,4 @@ export const listOne = async (req,res)=>{
         console.error(e)
         res.status(400).end()
     }
-};
+}; 
