@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {list, listOne} from './user.controller';
+import {list, listOne, listOneByEmail} from './user.controller';
 
 const userRouter = Router();
 
@@ -10,5 +10,9 @@ userRouter
 userRouter
     .route('/:id')
     .get(listOne)
+
+userRouter
+    .route('/email/:email')
+    .get(listOneByEmail)
 
  export default userRouter;

@@ -17,10 +17,10 @@ export const listOne = async (req,res)=>{
 };
 // POST /api/user/login/
 export const login = async (req,res)=>{
-    if(authUser(req,res)) {
+    if(await authUser(req,res)) {
         sign(req,res);
     } else {
-        res.status(400).end();
+        res.status(403).end();
     }
 };
 
