@@ -9,11 +9,12 @@ const projectsSchema = new mongoose.Schema({
     },
     description: {
         type : String,
-        maxlength: 500
+        maxlength: 500,
+        default: ""
     },
     author_id: {
         type: String,
-        required: true
+        required: true,
     },
     creation_date : {
         type: Date,
@@ -21,13 +22,16 @@ const projectsSchema = new mongoose.Schema({
         immutable: true
     },
     start_date : {
-        type: Date
+        type: Date,
+        default: Date.now,
     },
     finish_date : {
-        type : Date
+        type : Date,
+        default: Date.now,
     },
     deadline : {
-        type : Date
+        type : Date,
+        default: Date.now,
     },
     status : {
         type : String,
@@ -73,11 +77,13 @@ const projectsSchema = new mongoose.Schema({
     comments : [
         {
             author_id : {
-                type : String
+                type : String,
+                required: true
             },
             comment : {
                 type : String,
-                maxlength : 400
+                maxlength : 400,
+                default: ""
             },
             date : {
                 type : Date,
@@ -87,7 +93,8 @@ const projectsSchema = new mongoose.Schema({
         }
     ],
     git : {
-        type : String
+        type : String,
+        default: "https://github.com/"
     },
     ressources : [
         {
@@ -129,7 +136,8 @@ const projectsSchema = new mongoose.Schema({
                 maxlength : 250
             },
             author_id : {
-                type : String
+                type : String,
+                required: true
             },
             labels : [
                 {
@@ -147,7 +155,8 @@ const projectsSchema = new mongoose.Schema({
             assigned : [
                 {
                     user_id : {
-                        type : String
+                        type : String,
+                        required : true
                     },
                     spend : {
                         type : Number,
@@ -159,7 +168,8 @@ const projectsSchema = new mongoose.Schema({
                 {
                     name : {
                         type : String,
-                        maxlength : 50
+                        maxlength : 50,
+                        default: ""
                     },
                     done : {
                         type : Boolean,
@@ -168,7 +178,8 @@ const projectsSchema = new mongoose.Schema({
                 }
             ],
             deadline : {
-                type : Date
+                type : Date,
+                default: Date.now
             },
             progression : {
                 type : Number,
@@ -187,7 +198,8 @@ const projectsSchema = new mongoose.Schema({
                 {
                     name : {
                         type : String,
-                        maxlength : 20
+                        maxlength : 20,
+                        default: ""
                     },
                     description : {
                         type : String,
@@ -197,7 +209,8 @@ const projectsSchema = new mongoose.Schema({
                         type : String
                     },
                     author_id : {
-                        type : String
+                        type : String,
+                        required: true
                     },
                     date : {
                         type : Date,
@@ -209,11 +222,13 @@ const projectsSchema = new mongoose.Schema({
             comments : [
                 {
                     author_id : {
-                        type : String
+                        type : String,
+                        required: true
                     },
                     comment : {
                         type : String,
-                        maxlength : 250
+                        maxlength : 250,
+                        default: ""
                     },
                     date : {
                         type : Date,

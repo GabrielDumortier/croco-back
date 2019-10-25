@@ -6,17 +6,20 @@ const usersSchema = new mongoose.Schema({
     
     firstname: {
         type: String, 
-        maxLength: 50, 
+        maxLength: 50,
+        default: "" 
         // required: true
     },
     lastname: {
         type: String, 
-        maxLength: 50, 
+        maxLength: 50,
+        default: "" 
         // required: true
     },
     username: {
         type: String, 
-        maxLength: 50, 
+        maxLength: 50,
+        default: "" 
         // required: true
     },
     email: {
@@ -36,18 +39,21 @@ const usersSchema = new mongoose.Schema({
     },
     company: {
         type: String, 
-        maxLength: 50
+        maxLength: 50,
+        default: ""
     },
     job: {
         type: String, 
-        maxLength: 50
+        maxLength: 50,
+        default: ""
     },
     links: [
         {type: String}
     ],
     phone: {
         type: Number,
-        maxLength: 20
+        maxLength: 20,
+        default: 0
     },
     projects: [{
         project_id: {type: String},
