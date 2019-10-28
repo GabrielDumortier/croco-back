@@ -3,7 +3,7 @@ import {Project} from './project.model';
 // GET /api/projects/
 export const list = async (req, res) => {
     try{
-        const projects = await Project.find();
+        const projects = await Project.find({},{__v:0});
         if(!projects) return res.status(404).end();
         res.status(200).json({projects:projects});
     } catch(e){
@@ -15,7 +15,7 @@ export const list = async (req, res) => {
 // GET /api/projects/:id
 export const listOne = async (req,res)=>{
     try{
-        const project = await Project.findOne({_id:req.params.id});
+        const project = await Project.findOne({_id:req.params.id},{__v:0});
         if(!project) return res.status(404).end();
         res.status(200).json({projects:project});
     } catch(e){
@@ -57,7 +57,7 @@ export const deleteOne = async (req,res) =>{
     try {
         const deletedProject = await Project.findByIdAndDelete({
                 _id:req.params.id
-            })
+            },{__v:0})
         if(!deletedProject) return res.status(404).end();
         res.status(200).json({projects:deletedProject});
     } catch(e){

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {colorValidator} from '../../utils/validator';
+import {colorValidator, emailValidator} from '../../utils/validator';
 
 const projectsSchema = new mongoose.Schema({
     name: {
@@ -52,6 +52,14 @@ const projectsSchema = new mongoose.Schema({
                 type : String,
                 default : "administrator",
                 enum : ["administrator", "moderator","editor","spectator"]
+            },
+            avatar_url : {
+                type: String,
+                default : "https://picsum.photos/id/237/60/60/"
+            },
+            email : {
+                type : String,
+                validator : [emailValidator, "VALIDATOR - ERROR - project.model : projects.users.email is invalid (email formatting required)"]
             }
         }
     ],
@@ -164,6 +172,10 @@ const projectsSchema = new mongoose.Schema({
                     }
                 }
             ],
+            total_time: {
+                type:Number,
+                default: 0
+            },
             checklist : [
                 {
                     name : {
@@ -240,7 +252,8 @@ const projectsSchema = new mongoose.Schema({
             status : {
                 type : String,
                 maxlength : 12,
-                default: "todo"
+                default: "todo",
+                enum : ["todo","doing","done","paused"]
             },
 
         }

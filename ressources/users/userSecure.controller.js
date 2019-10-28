@@ -7,7 +7,7 @@ import { sign } from '../../utils/tokens';
 // GET /api/user/:id
 export const listOne = async (req,res)=>{
     try{
-        const user = await User.findOne({_id:req.params.id});
+        const user = await User.findOne({_id:req.params.id},{ __v:0});
         if(!user) return res.status(404).end();
         res.status(200).json({users:user});
     } catch(e){
@@ -33,7 +33,7 @@ export const create = async (req, res) => {
 // PUT  /api/user/:id
 export const updateOne = async (req,res) =>{
     try {
-        const user = await User.findOne({_id:req.params.id})
+        const user = await User.findOne({_id:req.params.id},{ __v:0})
         if(!user) return res.status(404).end();
         if (user.password !== req.body.password) req.body.password = user.generateHash(req.body.password)
         const updatedUser = await User.findOneAndUpdate({
@@ -55,7 +55,7 @@ export const deleteOne = async (req,res) =>{
     try {
         const deletedUser = await User.findByIdAndDelete({
                 _id:req.params.id
-            })
+            },{ __v:0})
         if(!deletedUser) return res.status(404).end();
         res.status(200).json({users:deletedUser});
     } catch(e){

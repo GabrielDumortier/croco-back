@@ -47,13 +47,16 @@ const usersSchema = new mongoose.Schema({
         maxLength: 50,
         default: ""
     },
-    links: [
-        {type: String}
-    ],
+    links: {
+        github :{type: String, default:""},
+        linkedin :{type: String, default:""},
+        blog :{type: String, default:""},
+        website :{type: String, default:""}
+    },
     phone: {
-        type: Number,
+        type: String,
         maxLength: 20,
-        default: 0
+        default: ""
     },
     projects: [{
         project_id: {type: String},
@@ -63,7 +66,12 @@ const usersSchema = new mongoose.Schema({
     }], // pas sur de la syntaxe
     tasks: [
         {type: String}
-    ]
+    ],
+    description :{
+        type: String,
+        maxLength:500,
+        default: ""
+    }
 });
 
 // METHOD TO ENCRYPT PASSWORD

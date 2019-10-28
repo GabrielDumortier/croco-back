@@ -4,7 +4,7 @@ import {User} from '../ressources/users/user.model';
 const createUser = async (req,res) =>{
   let user;
   try {
-    user = await User.findOne({ 'email': req.body.email });
+    user = await User.findOne({ 'email': req.body.email },{ __v:0});
   } catch(e){
     console.error(e)
     res.end()
@@ -32,7 +32,7 @@ const createUser = async (req,res) =>{
 const authUser = async (req,res) => {
   let user;
   try {
-    user = await User.findOne({ 'email': req.body.email });
+    user = await User.findOne({ 'email': req.body.email },{ __v:0});
   } catch(e){
     console.error(e)
     return false;
