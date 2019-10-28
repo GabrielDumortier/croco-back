@@ -169,6 +169,10 @@ const projectsSchema = new mongoose.Schema({
                     spend : {
                         type : Number,
                         default : 0
+                    },
+                    avatar_url : {
+                        type: String,
+                        default : "https://picsum.photos/id/237/60/60/"
                     }
                 }
             ],
