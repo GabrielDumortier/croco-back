@@ -88,6 +88,10 @@ const projectsSchema = new mongoose.Schema({
                 type : String,
                 required: true
             },
+            avatar_url : {
+                type: String,
+                default : "https://picsum.photos/id/237/60/60/"
+            },
             comment : {
                 type : String,
                 maxlength : 400,
@@ -240,6 +244,10 @@ const projectsSchema = new mongoose.Schema({
                     author_id : {
                         type : String,
                         required: true
+                    },
+                    avatar_url : {
+                        type: String,
+                        default : "https://picsum.photos/id/237/60/60/"
                     },
                     comment : {
                         type : String,
