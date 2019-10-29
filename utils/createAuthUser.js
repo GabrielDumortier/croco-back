@@ -19,7 +19,8 @@ const createUser = async (req,res) =>{
     newUser.email = req.body.email;
     newUser.password = newUser.generateHash(req.body.password);
     try{
-      await User.create(newUser);
+      await User(newUser).save();
+      // await User.create(newUser);
       res.status(201).json(newUser);
     }catch(e){
       console.error(e);
