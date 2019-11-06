@@ -4,7 +4,7 @@ import {User} from '../ressources/users/user.model'
 // Here to change encryption key of the token
 const secretKey = 'notSecretKey';
 // Here to change the duration of the token
-const expiration = '300s'
+const expiration = '3600s'
 
 const verifyToken = (req, res, next) => {
   // Get auth header value
