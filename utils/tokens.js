@@ -2,15 +2,13 @@ import jwt from 'jsonwebtoken';
 import {User} from '../ressources/users/user.model'
 
 // Here to change encryption key of the token
-const secretKey = 'notSecretKey';
+const secretKey = 'aKroKeydile';
 // Here to change the duration of the token
 const expiration = '3600s'
 
 const verifyToken = (req, res, next) => {
   // Get auth header value
   const bearerHeader = req.headers['authorization'];
-  console.log('---CLG FROM VERIFYTOKEN ---')
-  console.log(bearerHeader);
   // Check if bearer is undefined
   if (typeof bearerHeader !== 'undefined') {
     // Split at the space
@@ -28,7 +26,6 @@ const verifyToken = (req, res, next) => {
 };
 
 const verify = (req, res, next) => {
-  console.log('--- CLG FROM VERIFY ----');
   jwt.verify(req.token, secretKey, (err, authData) => {
     if (err) {
       res.status(403).end();
