@@ -63,9 +63,10 @@ const usersSchema = new mongoose.Schema({
         favorite: {type: Boolean},
         accepted: {type: Boolean, default : false},
         invitedBy: {type: String},
+        tasks : [{type: String}]
     }], // pas sur de la syntaxe
     tasks: [
-        {type: String}
+        {type: String} // il faudra effacer
     ],
     description :{
         type: String,
