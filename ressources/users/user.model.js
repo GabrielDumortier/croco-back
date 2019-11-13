@@ -29,7 +29,8 @@ const usersSchema = new mongoose.Schema({
         validate: [emailValidator, "VALIDATOR - ERROR - user.model : users.email is invalid"]
     },
     password: {
-        type: String, 
+        type: String,
+        minlength: 6, 
         // maxlength: 50, 
         required: true
     },

@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {listOne, create, login, updateOne, deleteOne } from './userSecure.controller';
+import {listOne, create, login, updateOne, deleteOne, newPassword } from './userSecure.controller';
 
 
 const userRouter = Router();
@@ -17,5 +17,9 @@ userRouter
 userRouter
     .route('/login')
     .post(login);
+
+userRouter
+    .route('/forgottenpassword')
+    .post(newPassword);
 
  export default userRouter;

@@ -1,6 +1,8 @@
 import {User} from './user.model';
 import {createUser, authUser} from '../../utils/createAuthUser';
 import { sign } from '../../utils/tokens';
+import generatePassword from '../../utils/generatePassword';
+import {mailer} from '../../utils/mailer';
 
 // We can GET and PUT password from here
 
@@ -68,3 +70,29 @@ export const deleteOne = async (req,res) =>{
         res.status(400).end()
     }
 };
+
+export const newPassword = async (req, res) => {
+    let password = generatePassword();
+    let email = req.body.email
+    let text = `
+Greetings from the team Akroko !
+here is your new password : ${password}
+You can change it in your profile`;
+    try {
+        const user = await User.findOne({email:email},{ __v:0})
+        if(!user) res.status(400).end();
+        user.password = user.generateHash(password)
+        const updatedUser = await User.findOneAndUpdate({
+            email:email
+        },
+            user,
+            {new:true}
+        )
+        if(!updatedUser) res.status(400).end();
+        mailer(email,'Akroko : new password',text)     
+        res.status(200).json({users:updatedUser})
+    } catch(e){
+        console.error(e);
+        res.status(400).end()    
+    }
+}

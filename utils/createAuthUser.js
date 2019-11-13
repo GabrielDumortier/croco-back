@@ -1,5 +1,6 @@
 // IMPORT MODEL
 import {User} from '../ressources/users/user.model';
+import { mailer } from '../utils/mailer';
 
 const createUser = async (req,res) =>{
   let user;
@@ -15,12 +16,17 @@ const createUser = async (req,res) =>{
   } else {
     // USER CREATION
     let newUser = new User();
+    let username = req.body.email.split('@')[0];
 
     newUser.email = req.body.email;
     newUser.password = newUser.generateHash(req.body.password);
+    newUser.username = username;
     try{
       await User(newUser).save();
       // await User.create(newUser);
+      
+      let text = `Dear ${username}, you are welcome to the Akroko family ! We wish you'll have a great times using our website !`
+      mailer(req.body.email, 'Welcome to the Akroko Family !', text)
       res.status(201).json(newUser);
     }catch(e){
       console.error(e);
