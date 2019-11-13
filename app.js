@@ -5,6 +5,7 @@ import usersRouter from './ressources/users/user.router';
 import userSecureRouter from './ressources/users/userSecure.router';
 import projectsRouter from './ressources/projects/project.router';
 import cors from 'cors'
+import {corsOptionsDelegate} from './utils/corsOptions'
 
 // Here to change the listenning port
 const port = 8001
@@ -15,7 +16,7 @@ app.use(json());
 app.use(urlencoded({extended:true}));
 
 //CORS - to remove for production
-app.use(cors())
+app.use(cors(corsOptionsDelegate))
 //routes
 app.use('/api/users', usersRouter);
 app.use('/api/user', userSecureRouter);

@@ -6,7 +6,7 @@ const projectRouter = Router();
 
 projectRouter
     .route('/')
-    .get(verifyToken, verify, list)
+    .get(list)
     .post(create)
 
 projectRouter

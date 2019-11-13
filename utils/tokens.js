@@ -43,6 +43,7 @@ export const sign = async (req, res) => {
     secretKey, { expiresIn: expiration },
     (err, token) => {
       if (err) console.error(err)
+
       res.status(200).json({ 
         idToken : token,
         expiresIn : expiration,

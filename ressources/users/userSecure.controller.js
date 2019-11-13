@@ -17,6 +17,8 @@ export const listOne = async (req,res)=>{
 };
 // POST /api/user/login/
 export const login = async (req,res)=>{
+    console.log(req.headers)
+    console.log('---------------')
     if(await authUser(req,res)) {
         sign(req,res);
     } else {
