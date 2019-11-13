@@ -160,7 +160,7 @@ const projectsSchema = new mongoose.Schema({
                     color : {
                         type : String,
                         maxlength: 7,
-                        validator: [colorValidator, "VALIDATOR - ERROR - project.model : projects.tasks.label.color is invalid (#hexadecimal required)"]
+                        validate: [colorValidator, "VALIDATOR - ERROR - project.model : projects.tasks.label.color is invalid (#hexadecimal required)"]
                     }
                 }
             ],

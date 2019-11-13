@@ -6,31 +6,31 @@ const usersSchema = new mongoose.Schema({
     
     firstname: {
         type: String, 
-        maxLength: 1,
+        maxlength: 50,
         default: "" 
         // required: true
     },
     lastname: {
         type: String, 
-        maxLength: 50,
+        maxlength: 50,
         default: "" 
         // required: true
     },
     username: {
         type: String, 
-        maxLength: 50,
+        maxlength: 50,
         default: "" 
         // required: true
     },
     email: {
         type: String, 
-        maxLength: 50, 
+        maxlength: 50, 
         required: true,
-        validator: [emailValidator, "VALIDATOR - ERROR - user.model : users.email is invalid"]
+        validate: [emailValidator, "VALIDATOR - ERROR - user.model : users.email is invalid"]
     },
     password: {
         type: String, 
-        // maxLength: 50, 
+        // maxlength: 50, 
         required: true
     },
     avatar_url: {
@@ -39,12 +39,12 @@ const usersSchema = new mongoose.Schema({
     },
     company: {
         type: String, 
-        maxLength: 50,
+        maxlength: 50,
         default: ""
     },
     job: {
         type: String, 
-        maxLength: 50,
+        maxlength: 50,
         default: ""
     },
     links: {
@@ -55,7 +55,7 @@ const usersSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        maxLength: 20,
+        maxlength: 20,
         default: ""
     },
     projects: [{
@@ -70,7 +70,7 @@ const usersSchema = new mongoose.Schema({
     ],
     description :{
         type: String,
-        maxLength:500,
+        maxlength:500,
         default: ""
     }
 });

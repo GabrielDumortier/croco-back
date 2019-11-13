@@ -17,8 +17,6 @@ export const listOne = async (req,res)=>{
 };
 // POST /api/user/login/
 export const login = async (req,res)=>{
-    console.log(req.headers)
-    console.log('---------------')
     if(await authUser(req,res)) {
         sign(req,res);
     } else {
@@ -34,21 +32,26 @@ export const create = async (req, res) => {
 
 // PUT  /api/user/:id
 export const updateOne = async (req,res) =>{
-    try {
-        const user = await User.findOne({_id:req.params.id},{ __v:0})
-        if(!user) return res.status(404).end();
-        if (user.password !== req.body.password) req.body.password = user.generateHash(req.body.password)
-        const updatedUser = await User.findOneAndUpdate({
-            _id:req.params.id
-        },
-            req.body,
-            {new:true}
-        )
-        if(!updatedUser) return res.status(404).end();     
-        res.status(200).json({users:updatedUser});
-    } catch {
-        console.error(e);
+    if (req.body._id && req.params.id !== req.body._id ) {
+        console.error('req.body._id and req.params.id didn\'t matches')
         res.status(400).end()
+    } else {
+        try {
+            const user = await User.findOne({_id:req.params.id},{ __v:0})
+            if(!user) return res.status(404).end();
+            if (user.password !== req.body.password) req.body.password = user.generateHash(req.body.password)
+            const updatedUser = await User.findOneAndUpdate({
+                _id:req.params.id
+            },
+                req.body,
+                {new:true}
+            )
+            if(!updatedUser) return res.status(404).end();     
+            res.status(200).json({users:updatedUser});
+        } catch {
+            console.error(e);
+            res.status(400).end()
+        }
     }
 };
 
