@@ -43,7 +43,7 @@ export const updateOne = async (req,res) =>{
                 _id:req.params.id
             },
                 req.body,
-                {new:true}
+                {new:true, runValidators:true}
         )
         if(!updatedProject) return res.status(404).end();
         res.status(200).json({projects:updatedProject});

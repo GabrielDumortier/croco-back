@@ -41,16 +41,17 @@ export const updateOne = async (req,res) =>{
         try {
             const user = await User.findOne({_id:req.params.id},{ __v:0})
             if(!user) return res.status(404).end();
-            if (user.password !== req.body.password) req.body.password = user.generateHash(req.body.password)
+            if (req.body.password === "" || !(req.body.password)) req.body.password = user.password
+            if (user.password !== req.body.password) req.body.password = user.generateHash(req.body.password);
             const updatedUser = await User.findOneAndUpdate({
                 _id:req.params.id
             },
                 req.body,
-                {new:true}
+                {new:true, runValidators:true}
             )
             if(!updatedUser) return res.status(404).end();     
             res.status(200).json({users:updatedUser});
-        } catch {
+        } catch(e) {
             console.error(e);
             res.status(400).end()
         }

@@ -59,7 +59,7 @@ const projectsSchema = new mongoose.Schema({
             },
             email : {
                 type : String,
-                validator : [emailValidator, "VALIDATOR - ERROR - project.model : projects.users.email is invalid (email formatting required)"]
+                validate : [emailValidator, "VALIDATOR - ERROR - project.model : projects.users.email is invalid (email formatting required)"]
             }
         }
     ],
