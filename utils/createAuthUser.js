@@ -8,11 +8,11 @@ const createUser = async (req,res) =>{
     user = await User.findOne({ 'email': req.body.email },{ __v:0});
   } catch(e){
     console.error(e)
-    res.end()
+    res.status(400).end()
   }
   if (user) {
     console.error('This email is already taken')
-    res.end()
+    res.status(400).end()
   } else {
     // USER CREATION
     let newUser = new User();
