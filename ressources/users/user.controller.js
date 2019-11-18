@@ -1,8 +1,6 @@
 import {User} from './user.model';
 import {emailValidator} from '../../utils/validator';
 
-// ## TODO : modifier afin de ne pas renvoyer les PW
-
 // GET /api/users/
 export const list = async (req,res)=>{
     try{
@@ -20,7 +18,6 @@ export const listOne = async (req,res)=>{
 
     try{
         const user = await User.findOne({_id:req.params.id},{password : 0, __v:0});
-        // if(!user) user = await User.findOne({email:req.params.email},{password : 0});
         if(!user) return res.status(404).end();
         res.status(200).json({users:user});
     } catch(e){

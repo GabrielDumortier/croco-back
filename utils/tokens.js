@@ -6,6 +6,8 @@ const secretKey = 'aKroKeydile';
 // Here to change the duration of the token
 const expiration = '3600s'
 
+
+//check if the token is valid
 const verifyToken = (req, res, next) => {
   // Get auth header value
   const bearerHeader = req.headers['authorization'];
@@ -25,7 +27,8 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-const verify = (req, res, next) => {
+//check if the user is logged in
+const verifyLogin = (req, res, next) => {
   jwt.verify(req.token, secretKey, (err, authData) => {
     if (err) {
       res.status(403).end();
@@ -35,10 +38,25 @@ const verify = (req, res, next) => {
   });
 };
 
+// check if the user logged in the same as the asked params
+const verifyUser = (req, res, next) => {
+  jwt.verify(req.token, secretKey, (err, authData) => {
+    if (err) {
+      res.status(403).end();
+    } else if (authData._id === req.params.id) {
+      next();
+    } else {
+      res.status(403).end()
+    }
+  });
+};
+
+//create the token for the authentification (login)
 export const sign = async (req, res) => {
   const user_id = await User.findOne({email:req.body.email},{ _id: 1})
   jwt.sign({
-    email: req.body.email
+    email: req.body.email,
+    _id : user_id._id
   },
     secretKey, { expiresIn: expiration },
     (err, token) => {
@@ -52,4 +70,4 @@ export const sign = async (req, res) => {
     });
 }
 
-export { verifyToken, verify, sign }
+export { verifyToken, verifyUser, verifyLogin, sign }

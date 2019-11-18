@@ -6,6 +6,6 @@ const dbUrl = 'mongodb://@localhost:27017/taskManager';
 export const connect = (url=dbUrl,opts = {})=>{
     return mongoose.connect(
         url,
-        {...opts,useNewUrlParser:true}
+        {...opts,useNewUrlParser:true, useUnifiedTopology: true}
     )
 }
