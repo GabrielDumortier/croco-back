@@ -22,7 +22,7 @@ export const login = async (req,res)=>{
     if(await authUser(req,res)) {
         sign(req,res);
     } else {
-        res.status(200).json({error : 403});
+        res.status(403).end();
         // TODO: check why need to put 200 instead of 403 which doesn't work
     }
 };

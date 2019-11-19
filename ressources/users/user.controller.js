@@ -1,8 +1,6 @@
 import {User} from './user.model';
 import {emailValidator} from '../../utils/validator';
 
-// ## TODO : modifier afin de ne pas renvoyer les PW
-
 // GET /api/users/
 export const list = async (req,res)=>{
     try{
