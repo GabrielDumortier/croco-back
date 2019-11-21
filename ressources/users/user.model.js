@@ -61,7 +61,7 @@ const usersSchema = new mongoose.Schema({
     },
     projects: [{
         project_id: {type: String},
-        favorite: {type: Boolean},
+        favorite: {type: Boolean, default : false},
         accepted: {type: Boolean, default : false},
         invitedBy: {type: String},
         tasks : [{type: String}]

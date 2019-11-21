@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import {colorValidator, emailValidator} from '../../utils/validator';
+import {colorGenerator} from '../../utils/generator';
 
 const projectsSchema = new mongoose.Schema({
     name: {
@@ -135,7 +136,8 @@ const projectsSchema = new mongoose.Schema({
         type : String,
         maxlength: 7,
         validator: [colorValidator, "VALIDATOR - ERROR - project.model : projects.color is invalid (#hexadecimal required)"],
-        default : '#0892d0'
+        default : colorGenerator
+
     },
     tasks : [
         {
@@ -160,7 +162,8 @@ const projectsSchema = new mongoose.Schema({
                     color : {
                         type : String,
                         maxlength: 7,
-                        validate: [colorValidator, "VALIDATOR - ERROR - project.model : projects.tasks.label.color is invalid (#hexadecimal required)"]
+                        validate: [colorValidator, "VALIDATOR - ERROR - project.model : projects.tasks.label.color is invalid (#hexadecimal required)"],
+                        default : colorGenerator
                     }
                 }
             ],

@@ -1,5 +1,6 @@
 import {Project} from './project.model';
 import {isAdmin, isModerator, isEditor, isSpectator} from '../../utils/projectCheckRole';
+import { User } from '../users/user.model';
 
 // GET /api/projects/
 export const list = async (req, res) => {
@@ -29,6 +30,16 @@ export const listOne = async (req,res)=>{
 export const create = async (req, res) => {
     try{
         console.log(req.body)
+        const author = await User.findOne({_id: req.body.author_id},{avatar_url : 1, _id:1,email:1,job:1})
+        req.body.users = []
+        req.body.users.push(
+            {
+                role: "administrator", 
+                user_id : author._id,
+                avatar_url : author.avatar_url, 
+                email : author.email, 
+                job : author.job}
+            )
         const project = await Project.create({...req.body});
         res.status(201).json({projects:project});
     }catch(e) {

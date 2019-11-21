@@ -4,7 +4,7 @@ import { sign } from '../../utils/tokens';
 import generatePassword from '../../utils/generatePassword';
 import {mailer} from '../../utils/mailer';
 
-// We can GET and PUT password from here
+// We can GET, PUT & POST password from here
 
 // GET /api/user/:id
 export const listOne = async (req,res)=>{
@@ -23,7 +23,6 @@ export const login = async (req,res)=>{
         sign(req,res);
     } else {
         res.status(403).end();
-        // TODO: check why need to put 200 instead of 403 which doesn't work
     }
 };
 
