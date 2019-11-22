@@ -51,27 +51,53 @@ export const create = async (req, res) => {
 // PUT  /api/projects/
 export const updateOne = async (req,res) =>{
     try {
-        
         const updatedProject = await Project.findOneAndUpdate({
                 _id:req.params.id
             },
                 req.body,
                 {new:true, runValidators:true}
         )
+
         if(!updatedProject) return res.status(404).end();
-        const tasks = updatedProject.tasks.map(task => {return { id : task._id, users : task.assigned.map( ass => ass.user_id) }})
+
+        const tasks = updatedProject.tasks.map(task => {
+            return { id : task._id, users : task.assigned.map( ass => ass.user_id) }
+        });
+
+        //loop each task
         tasks.map(task => {
+
+            //loop each user in task    
             task.users.map(async user_id => {
+
+                console.log(user_id);
                 let isChange = false;
+                console.log(User);
                 let user = await User.findOne({_id : user_id});
-                let index = user.projects.findIndex(project => (project.project_id === req.params.id));
-                let indexBis
+                //user returns null 
+
+                console.log(user)
+                // console.log(users.projects);
+                let index = user.projects.findIndex( 
+                    project => (project.project_id === req.params.id));
+
+                let indexBis;
+
+                //if find project_id in the users task
+                // indexBis equals the task_id  
                 if (index != -1) indexBis = user.projects[index].tasks.findIndex(t => (t === task.id));
+                
+                console.log('----------indexBis----------')
+                console.log(indexBis)
+
                 if (index != -1 && indexBis === -1) {
                     user.projects[index].tasks.push(task.id);
                     isChange = true;
                 }
+
+                console.log('----------User----------')
                 console.log(user)
+
                 if (isChange) await User.findOneAndUpdate({
                     _id: user_id
                 },
