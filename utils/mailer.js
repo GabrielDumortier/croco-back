@@ -34,6 +34,6 @@ export let mailer = async (email, subject, text) => {
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
     } catch(e){
-        console.log(e)
+        console.error(e)
     }
 }

@@ -6,21 +6,24 @@ import userSecureRouter from './ressources/users/userSecure.router';
 import projectsRouter from './ressources/projects/project.router';
 import cors from 'cors'
 import {corsOptionsDelegate} from './utils/corsOptions'
+//one file to change most of the common value
+import value from './utils/globalValue'
 
 // Here to change the listenning port
-const port = 8001
+const port = value.port
 
 const app = express();
 
 app.use(json());
 app.use(urlencoded({extended:true}));
 
-//CORS - to remove for production
-app.use(cors(corsOptionsDelegate))
+//CORS - edit the whitelist for production
+app.use(cors(corsOptionsDelegate)) // utils/corsOptions
+
 //routes
-app.use('/api/users', usersRouter);
-app.use('/api/user', userSecureRouter);
-app.use('/api/projects', projectsRouter);
+app.use('/api/users', usersRouter); // ressources/users
+app.use('/api/user', userSecureRouter); // ressources/users
+app.use('/api/projects', projectsRouter); // ressources/projects
 
 const start = async () => {
     try {

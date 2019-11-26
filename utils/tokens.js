@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 import {User} from '../ressources/users/user.model'
+import value from './globalValue';
 
 // Here to change encryption key of the token
-const secretKey = 'aKroKeydile';
+const secretKey = value.token.secretkey;
 // Here to change the duration of the token
-const expiration = '3600s'
+const expiration = value.token.expiration;
 
 
 //check if the token is valid
@@ -43,6 +44,7 @@ const verifyUser = (req, res, next) => {
   jwt.verify(req.token, secretKey, (err, authData) => {
     if (err) {
       res.status(403).end();
+      // check if the user._id is the same as the request
     } else if (authData._id === req.params.id || authData._id === req.body._id) {
       next();
     } else {

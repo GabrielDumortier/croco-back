@@ -29,7 +29,7 @@ export const listOne = async (req, res) => {
 // POST /api/projects/
 export const create = async (req, res) => {
     try {
-        console.log(req.body)
+        // add the creator to the user.assigned
         const author = await User.findOne({ _id: req.body.author_id }, { avatar_url: 1, _id: 1, email: 1, job: 1 })
         req.body.users = []
         req.body.users.push(
@@ -44,7 +44,7 @@ export const create = async (req, res) => {
         const project = await Project.create({ ...req.body });
         res.status(201).json({ projects: project });
     } catch (e) {
-        console.log(e);
+        console.error(e);
         res.status(400).end();
     }
 }
@@ -90,48 +90,6 @@ export const updateOne = async (req, res) => {
                 );
             })
         })
-        // //loop each task
-        // tasks.map(task => {
-
-        //     //loop each user in task    
-        //     task.users.map(async user_id => {
-
-        //         console.log(user_id);
-        //         let isChange = false;
-        //         console.log(User);
-        //         let user = await User.findOne({_id : user_id});
-        //         //user returns null 
-
-        //         console.log(user)
-        //         // console.log(users.projects);
-        //         let index = user.projects.findIndex( 
-        //             project => (project.project_id === req.params.id));
-
-        //         let indexBis;
-
-        //         //if find project_id in the users task
-        //         // indexBis equals the task_id  
-        //         if (index != -1) indexBis = user.projects[index].tasks.findIndex(t => (t === task.id));
-
-        //         console.log('----------indexBis----------')
-        //         console.log(indexBis)
-
-        //         if (index != -1 && indexBis === -1) {
-        //             user.projects[index].tasks.push(task.id);
-        //             isChange = true;
-        //         }
-
-        //         console.log('----------User----------')
-        //         console.log(user)
-
-        //         if (isChange) await User.findOneAndUpdate({
-        //             _id: user_id
-        //         },
-        //         user,
-        //         {new:true, runValidators:true}
-        //         );
-        //     })
-        // })
         res.status(200).json({ projects: updatedProject });
     } catch (e) {
         console.error(e);
