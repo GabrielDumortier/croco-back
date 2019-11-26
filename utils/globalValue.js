@@ -6,5 +6,6 @@ export default global = {
         secretkey : 'aKroKeydile',
         expiration : '36000s'
     },
+    mailer : {},
     whitelist : ['http://localhost:4200']
 }
