@@ -145,6 +145,18 @@ export const deleteOne = async (req, res) => {
             _id: req.params.id
         }, { __v: 0 })
         if (!deletedProject) return res.status(404).end();
+        deletedProject.users.map(async user => {
+            // delete the project one the users
+            let updatedUser = await User.findById(user.user_id);
+            let index = updatedUser.projects.findIndex( project => {project.project_id === req.params.id})
+            updatedUser.projects.splice(index,1)
+            await User.findByIdAndUpdate(
+                user.user_id
+            ,
+                updatedUser,
+                {new:true, runValidators:true}
+            )
+        })
         res.status(200).json({ projects: deletedProject });
     } catch (e) {
         console.error(e);

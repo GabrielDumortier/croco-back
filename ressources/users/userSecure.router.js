@@ -12,9 +12,9 @@ userRouter
 // /api/user/:id
 userRouter
     .route('/:id')
-    .get(listOne)
-    .put(updateOne)
-    .delete(deleteOne);
+    .get(verifyToken, verifyUser, listOne)
+    .put(verifyToken, verifyUser, updateOne)
+    .delete(verifyToken, verifyUser, deleteOne);
 
 // /api/user/login
 userRouter

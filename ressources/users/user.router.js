@@ -12,7 +12,7 @@ userRouter
 // /api/user/:id
 userRouter
     .route('/:id')
-    .get(listOne)
+    .get(verifyToken, verifyLogin, listOne)
 // /api/user/email/:email
 userRouter
     .route('/email/:email')

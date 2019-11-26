@@ -43,7 +43,7 @@ const verifyUser = (req, res, next) => {
   jwt.verify(req.token, secretKey, (err, authData) => {
     if (err) {
       res.status(403).end();
-    } else if (authData._id === req.params.id) {
+    } else if (authData._id === req.params.id || authData._id === req.body._id) {
       next();
     } else {
       res.status(403).end()

@@ -8,13 +8,13 @@ const projectRouter = Router();
 projectRouter
     .route('/')
     .get(list)
-    .post(create);
+    .post(verifyToken, verifyLogin,create);
     
 // /api/projects/:id
 projectRouter
     .route('/:id')
     .get(listOne)
-    .put(updateOne)
-    .delete(deleteOne);
+    .put(verifyToken, verifyLogin,updateOne)
+    .delete(verifyToken, verifyLogin,deleteOne);
 
  export default projectRouter;
